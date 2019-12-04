@@ -3,6 +3,9 @@ SmallUtil.detail = {}
 
 SmallUtil.tau = 6.283185307179586476925286766559
 SmallUtil.phi = 0.6180339887498948482045868343656
+SmallUtil.maxInt = 9007199254740991
+
+SmallUtil.noop = function() {}
 
 SmallUtil.detail.windowLoaded = false
 
@@ -288,4 +291,14 @@ SmallUtil.lexCompare = function(a, b) {
 	} else {
 		return 0
 	}
+}
+
+SmallUtil.getPath = function(object, path) {
+	for (var i = 0, len = path.length; i < len; ++i) {
+		var object = object[path[i]]
+		if (object == null) {
+			return null
+		}
+	}
+	return object
 }

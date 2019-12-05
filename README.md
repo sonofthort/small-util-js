@@ -8,6 +8,7 @@ Can merge the utils into your own object with the following line:
 
 Overview of features:
 - Numeric/mathematical constants.
+- Type checking functions.
 - Object iteration functions, replacing the need for `isOwnProperty()` loops.
 - Object assignment, conditional assignment, and extension.
 - Other object utilities.

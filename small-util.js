@@ -97,6 +97,7 @@ SmallUtil.extend = function(base, fields) {
 	return SmallUtil.assign({}, base, fields)
 }
 
+// does not handle recursive references
 SmallUtil.deepCopy = function(value) {
 	if (SmallUtil.isArray(value)) {
 		return value.map(SmallUtil.deepCopy)

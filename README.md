@@ -16,7 +16,7 @@ Overview of features:
 - Array utilities.
 - String utilities.
 - Fullscreen utilities.
-- Window scaling utilities.
+- Element scaling utilities.
 - `windowLoaded` event callback registering helper.
 - An assert() function.
 - A deep-copy function.

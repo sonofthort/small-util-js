@@ -1,5 +1,5 @@
 # small-util-js
-A small set of random JavaScript utils which I've found to be useful for general development.
+A small set of simple JavaScript util functions which I've found to be useful for general development.
 
 Can merge the utils into your own object with the following line:
 

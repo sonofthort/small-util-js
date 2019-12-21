@@ -97,6 +97,35 @@ SmallUtil.extend = function(base, fields) {
 	return SmallUtil.assign({}, base, fields)
 }
 
+SmallUtil.removeUnstable = function(arr, value) {
+	var index = arr.indexOf(value)
+	if (index < 0) {
+		return false
+	}
+	SmallUtil.removeUnstableByIndex(arr, index)
+	return true
+}
+
+SmallUtil.removeUnstableByIndex = function(arr, index) {
+	var last = arr.pop()
+	if (index < arr.length) {
+		arr[index] = last
+	}
+}
+
+SmallUtil.removeStable = function(arr, value) {
+	var index = arr.indexOf(value)
+	if (index < 0) {
+		return false
+	}
+	SmallUtil.removeStableByIndex(arr, index)
+	return true
+}
+
+SmallUtil.removeStableByIndex = function(arr, index) {
+	arr.splice(index, 1)
+}
+
 // does not handle recursive references
 SmallUtil.deepCopy = function(value) {
 	if (SmallUtil.isArray(value)) {

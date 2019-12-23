@@ -69,25 +69,33 @@ SmallUtil.generate = function(n, func) {
 	return res
 }
 
-SmallUtil.assign = Object.assign || function(obj, /* otherObjects... */)  {
-	var f = function(k, v) {obj[k] = v}
-
+SmallUtil.assign = function(obj, /* otherObjects... */)  {
 	for (var i = 1, len = arguments.length; i < len; ++i) {
-		SmallUtil.kv(arguments[i], f)
+		var otherObject = arguments[i]
+		if (otherObject) {
+			for (var k in otherObject) {
+				if (otherObject.hasOwnProperty(k)) {
+					obj[k] = otherObject[k]
+				}
+			}
+		}
 	}
 	
 	return obj
 }
 
 SmallUtil.assignIf = function(obj, /* otherObjects... */)  {
-	var f = function(k, v) {
-		if (obj[k] == null) {
-			obj[k] = v
-		}
-	}
-
 	for (var i = 1, len = arguments.length; i < len; ++i) {
-		SmallUtil.kv(arguments[i], f)
+		var otherObject = arguments[i]
+		if (otherObject) {
+			for (var k in otherObject) {
+				if (otherObject.hasOwnProperty(k)) {
+					if (obj[k] == null) {
+						obj[k] = otherObject[k]
+					}
+				}
+			}
+		}
 	}
 	
 	return obj
@@ -290,6 +298,23 @@ SmallUtil.pluralize = function(str, count, pluralStr) {
 		return pluralStr
 	}
 	return str + 's'
+}
+
+SmallUtil.vowels = {
+	'a': true,
+	'e': true,
+	'i': true,
+	'o': true,
+	'u': true,
+	'A': true,
+	'E': true,
+	'I': true,
+	'O': true,
+	'U': true
+}
+
+SmallUtil.startsWithVowel = function(str) {
+	return SmallUtil.vowels[str.charAt(0)] === true
 }
 
 SmallUtil.addPlusSign = function(num) {

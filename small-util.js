@@ -147,6 +147,12 @@ SmallUtil.deepCopy = function(value) {
 	}
 }
 
+SmallUtil.always = function(value) {
+	return function() {
+		return value
+	}
+}
+
 SmallUtil.isInFullScreen = function(element) {
 	element = element || document.body
 	return (document.fullscreenElement && document.fullscreenElement !== null) ||

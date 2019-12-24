@@ -23,7 +23,7 @@ SmallUtil.onWindowLoaded = function(cb) {
 
 SmallUtil.assert = function(value, msg) {
 	if (value) {return value}
-	throw('assert failed: ' + (msg || '') + '\n' + (new Error()).stack)
+	throw('assertion failed: ' + (msg || '') + '\n' + (new Error()).stack)
 }
 
 SmallUtil.ifNull = function(a, b) {

@@ -290,6 +290,10 @@ SmallUtil.capitalize = function(str)  {
 	return str.charAt(0).toUpperCase() + str.slice(1)
 }
 
+SmallUtil.uncapitalize = function(str)  {
+	return str.charAt(0).toLowerCase() + str.slice(1)
+}
+
 SmallUtil.pluralize = function(str, count, pluralStr) {
 	if (count === 1) {
 		return str
@@ -324,6 +328,29 @@ SmallUtil.addPlusSign = function(num) {
 	} else {
 		return num.toString()
 	}
+}
+
+SmallUtil.splitCamelCase = function(str) {
+	var length = str.length,
+		words = []	
+	
+	if (length === 0) {
+		return words
+	}
+	
+	var start = 0
+	
+	for (var i = 1; i < length; ++i) {
+		var character = str.charAt(i)
+		if (character === character.toUpperCase()) {
+			words.push(str.substring(start, i))
+			start = i
+		}
+	}
+	
+	words.push(str.substring(start, length))
+	
+	return words
 }
 
 SmallUtil.lexCompare = function(a, b) {

@@ -147,6 +147,16 @@ SmallUtil.deepCopy = function(value) {
 	}
 }
 
+SmallUtil.shallowCopy = function(value) {
+	if (SmallUtil.isArray(value)) {
+		return value.slice()
+	} else if (SmallUtil.isObject(value)) {
+		return SmallUtil.assign({}, value)
+	} else {
+		return value
+	}
+}
+
 SmallUtil.always = function(value) {
 	return function() {
 		return value

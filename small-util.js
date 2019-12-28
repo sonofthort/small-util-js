@@ -6,6 +6,7 @@ SmallUtil.phi = 0.6180339887498948482045868343656
 SmallUtil.maxInt = 9007199254740991
 
 SmallUtil.noop = function() {}
+SmallUtil.identity = function(value) {return value}
 
 SmallUtil.detail.windowLoaded = false
 

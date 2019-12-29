@@ -401,3 +401,31 @@ SmallUtil.getPath = function(object, path) {
 	}
 	return object
 }
+
+SmallUtil.formatString = function(format, data, assertNotNull) {
+	var isArray = SmallUtil.isArray(data),
+		result = '',
+		start = 0
+	for (;;) {
+		var left = format.indexOf('{', start)
+		if (left >= 0) {
+			result += format.substring(start, left)
+			var right = format.indexOf('}', left + 1)
+			SmallUtil.assert(right >= 0, 'Invalid format string: ill-formed braces')
+			var key = format.substring(left + 1, right)
+			if (isArray) {
+				key = parseInt(key)
+			}
+			var value = data[key]
+			if (assertNotNull) {
+				SmallUtil.assert(value != null, 'Invalid format string: key "' + key + '" not found')
+			}
+			result += value
+			start = right + 1
+		} else {
+			result += format.substring(start)
+			break
+		}
+	}
+	return result
+}

@@ -6,7 +6,6 @@ SmallUtil.phi = 0.6180339887498948482045868343656
 SmallUtil.maxInt = 9007199254740991
 
 SmallUtil.noop = function() {}
-SmallUtil.identity = function(value) {return value}
 
 SmallUtil.detail.windowLoaded = false
 
@@ -158,10 +157,46 @@ SmallUtil.shallowCopy = function(value) {
 	}
 }
 
+SmallUtil.identity = function(value) {return value}
+
 SmallUtil.always = function(value) {
 	return function() {
 		return value
 	}
+}
+
+SmallUtil.addAccessor = function(object, key, descriptor) {
+	if (SmallUtil.isFunction(descriptor)) {
+		descriptor = {
+			get: descriptor
+		}
+	} else {
+		descriptor = {
+			get: descriptor.get,
+			set: descriptor.set
+		}
+	}
+	if (descriptor.set == null) {
+		descriptor.set = function() {
+			SmallUtil.assert(false, 'key "' + key + '" cannot be set')
+		}
+	}
+	return Object.defineProperty(object, key, descriptor)
+}
+
+SmallUtil.addConstant = function(object, key, value) {
+	return SmallUtil.addAccessor(object, key, function() {
+		return value
+	})
+}
+
+SmallUtil.addConstants = function(object, keyValueObject) {
+	for (var key in keyValueObject) {
+		if (keyValueObject.hasOwnProperty(key)) {
+			SmallUtil.addConstant(object, key, keyValueObject[key])
+		}
+	}
+	return object
 }
 
 SmallUtil.isInFullScreen = function(element) {

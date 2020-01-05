@@ -165,7 +165,7 @@ SmallUtil.always = function(value) {
 	}
 }
 
-SmallUtil.addAccessor = function(object, key, descriptor) {
+SmallUtil.defineAccessor = function(object, key, descriptor) {
 	if (SmallUtil.isFunction(descriptor)) {
 		descriptor = {
 			get: descriptor
@@ -184,16 +184,16 @@ SmallUtil.addAccessor = function(object, key, descriptor) {
 	return Object.defineProperty(object, key, descriptor)
 }
 
-SmallUtil.addConstant = function(object, key, value) {
-	return SmallUtil.addAccessor(object, key, function() {
+SmallUtil.defineConstant = function(object, key, value) {
+	return SmallUtil.defineAccessor(object, key, function() {
 		return value
 	})
 }
 
-SmallUtil.addConstants = function(object, keyValueObject) {
+SmallUtil.defineConstants = function(object, keyValueObject) {
 	for (var key in keyValueObject) {
 		if (keyValueObject.hasOwnProperty(key)) {
-			SmallUtil.addConstant(object, key, keyValueObject[key])
+			SmallUtil.defineConstant(object, key, keyValueObject[key])
 		}
 	}
 	return object
@@ -350,9 +350,43 @@ SmallUtil.pluralize = function(str, count, pluralStr) {
 	if (count === 1) {
 		return str
 	}
+	
 	if (pluralStr) {
 		return pluralStr
 	}
+	
+	var length = str.length
+	
+	if (length > 2) {
+		var lastTwo = str.substring(length - 2),
+			last = str.charAt(length - 1)
+		
+		if (lastTwo === 'ss' || lastTwo === 'sh' || lastTwo === 'ch') {
+			return str + 'es'
+		}
+		
+		if (lastTwo === 'is') {
+			return return str.substring(0, length - 2) + 'es'
+		}
+		
+		if (lastTwo === 'us') {
+			return return str.substring(0, length - 2) + 'i'
+		}
+		
+		if (last === 's' || last === 'x' || last === 'z') {
+			return str + 'es'
+		}
+		
+		if (last === 'o') {
+			return str + 'es'
+		}
+		
+		var secondToLast = str.charAt(length - 2)
+		if (last === 'y' && SmallUtil.vowels[secondToLast] !== true) {
+			return str.substring(0, length - 1) + 'ies'
+		}
+	}
+	
 	return str + 's'
 }
 

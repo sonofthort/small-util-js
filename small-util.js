@@ -366,11 +366,11 @@ SmallUtil.pluralize = function(str, count, pluralStr) {
 		}
 		
 		if (lastTwo === 'is') {
-			return return str.substring(0, length - 2) + 'es'
+			return str.substring(0, length - 2) + 'es'
 		}
 		
 		if (lastTwo === 'us') {
-			return return str.substring(0, length - 2) + 'i'
+			return str.substring(0, length - 2) + 'i'
 		}
 		
 		if (last === 's' || last === 'x' || last === 'z') {
